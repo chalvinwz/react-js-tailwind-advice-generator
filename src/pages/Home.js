@@ -4,6 +4,9 @@ import Loading from '../components/Loading';
 
 import { useFetchQuote } from '../hooks/useFetchQuote';
 
+// TODO:
+// !! footer
+
 const Home = () => {
 	const {
 		randomQuotes,
