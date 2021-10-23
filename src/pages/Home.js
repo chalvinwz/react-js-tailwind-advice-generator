@@ -1,6 +1,8 @@
 import SearchBar from '../components/SearchBar';
-import AdviceCard from '../components/AdviceCard';
 import Loading from '../components/Loading';
+import Error from '../components/Error';
+import RandomQuote from '../components/RandomQuote';
+import SearchQuote from '../components/SearchQuote';
 
 import { useFetchQuote } from '../hooks/useFetchQuote';
 
@@ -16,24 +18,22 @@ const Home = () => {
 		setSearchTerm,
 	} = useFetchQuote();
 
-	if (randomQuotes.isLoading) return <Loading />;
-	if (searchQuotes.isLoading) return <Loading />;
+	if (randomQuotes.isLoading || searchQuotes.isLoading) return <Loading />;
 
-	if (randomQuotes.error) return <div>Something gone wrong</div>;
+	if (randomQuotes.error || searchQuotes.error) return <Error />;
 
 	return (
-		<main>
+		<main className='min-h-screen'>
 			<SearchBar
 				setSearchFetch={setSearchFetch}
 				setSearchTerm={setSearchTerm}
 				searchQuotes={searchQuotes.data}
 			/>
+
 			{searchQuotes.data ? (
-				searchQuotes.data.map((searchData) => (
-					<AdviceCard searchData={searchData} key={searchData.id} />
-				))
+				<SearchQuote searchData={searchQuotes.data} />
 			) : (
-				<AdviceCard
+				<RandomQuote
 					randomData={randomQuotes.data}
 					setRandomFetch={setRandomFetch}
 				/>

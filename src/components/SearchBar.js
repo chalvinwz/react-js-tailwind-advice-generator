@@ -23,7 +23,9 @@ const SearchBar = ({ setSearchTerm, setSearchFetch, searchQuotes }) => {
 					className='input input-bordered input-sm mr-4 w-64 h-10'
 					required
 				/>
-				<button className='btn btn-info btn-sm text-xs w-20'>Search</button>
+				<button className='btn btn-primary btn-outline btn-sm text-xs w-20'>
+					Search
+				</button>
 			</form>
 		</section>
 	);

@@ -18,7 +18,7 @@ export const useFetchQuote = () => {
 		}
 	};
 
-	const searchQuotesFetch = async () => {
+	const searchQuotesFetch = async (searchTerm) => {
 		try {
 			const { data } = await axios.get(
 				`https://api.adviceslip.com/advice/search/${searchTerm}`
@@ -35,9 +35,13 @@ export const useFetchQuote = () => {
 		enabled: randomFetch,
 	});
 
-	const searchQuotes = useQuery('searchQuotes', searchQuotesFetch, {
-		enabled: searchFetch,
-	});
+	const searchQuotes = useQuery(
+		'searchQuotes',
+		() => searchQuotesFetch(searchTerm),
+		{
+			enabled: searchFetch,
+		}
+	);
 
 	return {
 		randomQuotes,
